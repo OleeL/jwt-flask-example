@@ -76,6 +76,7 @@ def refresh():
         return jsonify({"error": "Missing refresh token"}), 401
 
     try:
+        # The next line will throw an error if token is invalid 
         decoded = jwt.decode(refresh_token, app.config['SECRET_KEY'], algorithms=["HS256"])
         # If we get here, refresh token is valid
         new_access_token = create_access_token({"username": decoded["data"]["username"]})
